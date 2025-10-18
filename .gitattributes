@@ -1,0 +1,117 @@
+# -----------------------------
+# .gitattributes — Unreal Engine 5.7 friendly
+# - force sensible EOL for text files
+# - mark binary asset extensions as binary (no textual diffs)
+# - GitHub Linguist hints to keep language stats propres
+# -----------------------------
+
+# Force LF line endings for project text files
+* text=auto eol=lf
+
+# Project config / text formats (keep as text)
+*.ini text eol=lf
+*.uproject text eol=lf
+*.uplugin text eol=lf
+*.json text eol=lf
+
+# Shaders / HLSL-like files (highlighting on GitHub)
+*.usf linguist-language=HLSL text
+
+# -----------------------------
+# Binary assets (no textual diffs) — Unreal-specific first
+# Mark Unreal binary assets as "linguist-generated" so GitHub
+# excludes them from language breakdown (they are binary game assets)
+# -----------------------------
+*.uasset binary linguist-generated
+*.umap binary linguist-generated
+*.uexp binary linguist-generated
+*.ubulk binary linguist-generated
+*.uptnl binary linguist-generated
+
+# -----------------------------
+# Media and art assets
+# -----------------------------
+# images & textures
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tga binary
+*.tif binary
+*.tiff binary
+*.bmp binary
+*.psd binary
+*.exr binary
+*.hdr binary
+*.dds binary
+
+# 3D models / interchange
+*.fbx binary
+*.obj binary
+
+# audio & video
+*.wav binary
+*.mp3 binary
+*.ogg binary
+*.flac binary
+*.aac binary
+*.mp4 binary
+*.mov binary
+
+# fonts, icons, misc
+*.ico binary
+*.xpm binary
+*.icns binary
+*.ttf binary
+*.otf binary
+*.asset binary
+
+# packages / blobs
+*.pak binary
+*.bin binary
+*.dat binary
+
+# compiled objects & libraries (if any accidentally committed)
+*.o binary
+*.a binary
+*.lib binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.exe binary
+*.out binary
+*.app binary
+
+# -----------------------------
+# GitHub Linguist hints (improve language stats)
+# - mark third-party/vendor code so it's ignored in lang stats
+# - mark generated/build output as generated (ignored)
+# -----------------------------
+# Third-party vendor code (if present)
+ThirdParty/** linguist-vendored
+
+# Build outputs / generated code
+Build/** linguist-generated
+Plugins/**/Binaries/** linguist-generated
+
+# Editor caches and derived data are typically ignored via .gitignore,
+# but if ever present in the repo they should not affect language stats
+DerivedDataCache/** linguist-generated
+Intermediate/** linguist-generated
+Saved/** linguist-generated
+
+# -----------------------------
+# Language overrides for highlighting and stats
+# -----------------------------
+*.c linguist-language=C
+*.cpp linguist-language=C++
+*.h linguist-language=C
+*.hpp linguist-language=C++
+*.py linguist-language=Python
+
+# -----------------------------
+# Export / archive tweaks (optional)
+# - prevent large or generated folders from being included in auto-release archives
+# -----------------------------
+Intermediate/** export-ignore
+DerivedDataCache/** export-ignore
+Saved/** export-ignore
